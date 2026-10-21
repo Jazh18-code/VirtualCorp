@@ -1,0 +1,210 @@
+
+# ============================================================
+# VirtualCorp - Bash, Ansible, Terraform i VirtualBox
+# ============================================================
+
+# ------------------------------------------------------------
+# Sistema operatiu i editors
+# ------------------------------------------------------------
+
+*~
+*.swp
+*.swo
+*.bak
+.DS_Store
+Thumbs.db
+.directory
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# JetBrains
+.idea/
+
+# ------------------------------------------------------------
+# Bash: temporals, depuració i sortides
+# ------------------------------------------------------------
+
+*.log
+*.tmp
+*.temp
+*.pid
+*.seed
+core
+core.*
+
+# Fitxers temporals creats per scripts
+/tmp/
+/temp/
+/.cache/
+
+# Resultats generats (adapta els noms a l'estructura real)
+logs/
+reports/
+output/
+*.out
+
+# ------------------------------------------------------------
+# Ansible
+# ------------------------------------------------------------
+
+# Fitxers de sortida i temporals
+*.retry
+.retry/
+ansible.log
+
+# Inventaris locals generats
+inventory/local
+inventory/local.*
+inventory/generated/
+inventories/local/
+inventories/generated/
+
+# Variables locals i secrets
+vault-password-file
+.vault-password
+.vault_pass
+group_vars/*/vault.yml
+host_vars/*/vault.yml
+
+# Credencials SSH
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_ecdsa
+known_hosts
+
+# ------------------------------------------------------------
+# Terraform
+# ------------------------------------------------------------
+
+# Directoris de treball
+**/.terraform/*
+.terraform/
+
+# Fitxers d'estat
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.*
+
+# Còpies de seguretat de l'estat
+*.backup
+*.tfstate.backup
+
+# Fitxers de variables locals
+*.tfvars
+*.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Excepció: plantilles d'exemple sense secrets
+!*.example.tfvars
+!*.example.tfvars.json
+
+# Fitxers de configuració local
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plans i sortides de Terraform
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+
+# Lock file: NO ignorar .terraform.lock.hcl
+# Cal versionar-lo per fixar les versions dels providers.
+
+# ------------------------------------------------------------
+# VirtualBox
+# ------------------------------------------------------------
+
+# Màquines virtuals i discos
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.vbox
+*.vbox-prev
+*.ova
+*.ovf
+*.qcow2
+*.img
+
+# Instantànies, estat desat i memòria
+*.sav
+*.vbox-tmp
+Snapshots/
+
+# Fitxers de bloqueig
+*.lck
+*.lock
+
+# Configuracions locals de VirtualBox
+VirtualBox.xml
+VBoxSVC.log
+VBox.log
+VBox.log.*
+
+# ------------------------------------------------------------
+# Imatges, ISOs i artefactes generats
+# ------------------------------------------------------------
+
+*.iso
+*.box
+*.qcow
+build/
+dist/
+
+# 1. Ignora todos los archivos en cualquier nivel de la estructura
+artifacts/**/.*
+artifacts/**/*
+
+# 2. Permite que Git entre en las subcarpetas para buscar archivos
+!artifacts/**/
+
+# 3. Exceptúa los archivos .gitkeep que mantendrán las carpetas vivas
+!artifacts/**/.gitkeep
+
+# ------------------------------------------------------------
+# Secrets i credencials
+# ------------------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+*.secret
+*.secrets
+secrets.yml
+secrets.yaml
+credentials.json
+credentials.yml
+credentials.yaml
+
+# Claus i certificats privats
+*.p12
+*.pfx
+*.crt
+*.cer
+*.pubkey
+
+# ------------------------------------------------------------
+# Dades locals de desenvolupament i proves
+# ------------------------------------------------------------
+
+.local/
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+

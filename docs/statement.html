@@ -1,0 +1,892 @@
+<div class="virtualcorp-project">
+  <h2>VirtualCorp: dissenya, desplega i documenta la infraestructura de la teva
+    delegació</h2>
+  <h3>1. El repte: una empresa en plena expansió</h3>
+  <p><strong>VirtualCorp</strong> és una multinacional dedicada al
+    desenvolupament de videojocs. Durant els darrers anys, el seu creixement ha
+    estat extraordinari: nous clients, nous projectes i nous equips de
+    desenvolupament han fet que l'empresa necessiti ampliar i modernitzar la
+    seva infraestructura tecnològica.</p>
+  <p>Per consolidar aquesta expansió, VirtualCorp ha decidit adquirir i
+    remodelar diversos edificis d'oficines. Totes les seus seguiran un model
+    arquitectònic semblant, amb quatre plantes i una distribució de xarxa
+    comuna.</p>
+  <p>Aquesta uniformitat permetrà a l'empresa aplicar una política
+    d'infraestructura homogènia, facilitar l'administració remota, reutilitzar
+    configuracions i reduir els costos de desplegament i manteniment.</p>
+  <p>Actualment, VirtualCorp disposa de <strong>30 delegacions operatives, a més
+      de la seu de Serveis Centrals</strong>. Cada delegació necessita una
+    infraestructura de xarxa pròpia, però totes hauran de poder comunicar-se amb
+    els serveis corporatius d'acord amb les polítiques de seguretat de
+    l'empresa.</p>
+  <p>La direcció tècnica ha establert que la nova infraestructura haurà de ser:
+  </p>
+  <ul>
+    <li>Fiable i segura.</li>
+    <li>Fàcil d'administrar i mantenir.</li>
+    <li>Ampliable davant del creixement de l'empresa.</li>
+    <li>Reproduïble en les diferents delegacions.</li>
+    <li>Automatitzable mitjançant eines d'administració i infraestructura com a
+      codi.</li>
+    <li>Correctament documentada per facilitar la seva gestió al llarg del
+      temps.</li>
+  </ul>
+  <p>Per assolir aquests objectius, VirtualCorp vol modernitzar la manera de
+    desplegar i administrar els seus serveis informàtics, aprofitant les
+    tecnologies actuals de virtualització, contenidorització i automatització.
+  </p>
+  <p><strong>La vostra missió serà assumir el paper de l'equip tècnic
+      responsable d'una de les delegacions de VirtualCorp.</strong></p>
+  <p>Haureu de dissenyar, desplegar, configurar, provar i documentar la
+    infraestructura de xarxa i els serveis informàtics bàsics de la vostra seu.
+    El resultat haurà de ser una infraestructura funcional, coherent i preparada
+    per créixer.</p>
+  <hr>
+  <h3>2. La vostra delegació</h3>
+  <p>Cada estudiant tindrà assignada una delegació concreta. L'assignació i les
+    dades identificatives de cada delegació es detallen a continuació.</p>
+  <p>Per facilitar l'administració de la xarxa corporativa, VirtualCorp
+    utilitzarà l'espai d'adreçament privat <strong>10.0.0.0/8</strong>.</p>
+  <p>A cada delegació se li reservarà un rang <strong>10.xx.0.0/16</strong>, on
+    <code>xx</code> identifica el número de la delegació.</p>
+  <p>Per exemple, a la delegació 7 li correspondria el rang
+    <code>10.7.0.0/16</code>, mentre que a la delegació 25 li correspondria el
+    rang <code>10.25.0.0/16</code>.</p>
+  <div class="alert alert-warning"><strong>Reserva per a VirtualBox:</strong> La
+    xarxa <code>10.0.0.0/16</code> es reservarà per a la configuració inicial de
+    l'entorn de laboratori amb VirtualBox i NAT. Aquesta xarxa no forma part de
+    l'adreçament de cap delegació de VirtualCorp.</div>
+  <h4>2.1. Assignació de delegacions</h4>
+  <p>La taula següent identifica les delegacions de VirtualCorp. La delegació 01
+    correspon a Serveis Centrals i les delegacions 02–31 corresponen a les
+    delegacions operatives.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Delegació</th>
+        <th>Nom de la delegació</th>
+        <th>Responsable</th>
+        <th>Rang d'adreces IP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01</td>
+        <td>Serveis Centrals</td>
+        <td>Professorat</td>
+        <td><code>10.1.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;jhoanluisaduvirifp25&quot;}">
+          <span
+            style="font-family: Liberation Serif;">jhoanluisaduvirifp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Aduviri Zambrana, Jhoan Luis&quot;}">
+          Aduviri Zambrana, Jhoan Luis</td>
+        <td><code>10.2.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;ikerarnosifp23&quot;}">
+          <span style="font-family: Liberation Serif;">ikerarnosifp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Arnosi Lázaro, Iker&quot;}">
+          Arnosi Lázaro, Iker</td>
+        <td><code>10.3.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>04</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;bielbenedictofp25&quot;}">
+          <span style="font-family: Liberation Serif;">bielbenedictofp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Benedicto Dominguez, Biel&quot;}">
+          Benedicto Dominguez, Biel</td>
+        <td><code>10.4.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>05</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;ericbrazofp23&quot;}">
+          <span style="font-family: Liberation Serif;">ericbrazofp23</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Brazo Orea, Eric&quot;}">
+          Brazo Orea, Eric</td>
+        <td><code>10.5.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>06</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;marionacatalanfp25&quot;}">
+          <span style="font-family: Liberation Serif;">marionacatalanfp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Catalan Gomez, Mariona&quot;}">
+          Catalan Gomez, Mariona</td>
+        <td><code>10.6.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>07</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;erikgarciafp&quot;}">
+          <span style="font-family: Liberation Serif;">erikgarciafp</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;GARCIA, ERIK&quot;}">
+          GARCIA, ERIK</td>
+        <td><code>10.7.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>08</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;gerardgomezfp&quot;}">
+          <span style="font-family: Liberation Serif;">gerardgomezfp</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Gomez Cardona, Gerard&quot;}">
+          Gomez Cardona, Gerard</td>
+        <td><code>10.8.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>09</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;arnauguerrerofp25&quot;}">
+          <span style="font-family: Liberation Serif;">arnauguerrerofp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Guerrero Asensio, Arnau&quot;}">
+          Guerrero Asensio, Arnau</td>
+        <td><code>10.9.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;abdelkarimhammachifp23&quot;}">
+          <span
+            style="font-family: Liberation Serif;">abdelkarimhammachifp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Hammachi Guarino, Karim&quot;}">
+          Hammachi Guarino, Karim</td>
+        <td><code>10.10.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;davidherrerafp25&quot;}">
+          <span style="font-family: Liberation Serif;">davidherrerafp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Herrera Cabanas, David&quot;}">
+          Herrera Cabanas, David</td>
+        <td><code>10.11.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;diegolaurinfp25&quot;}">
+          <span style="font-family: Liberation Serif;">diegolaurinfp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Laurin, Diego&quot;}">
+          Laurin, Diego</td>
+        <td><code>10.12.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;javierlazarofp24&quot;}">
+          <span style="font-family: Liberation Serif;">javierlazarofp24</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Lázaro Cabrerizo, Javier&quot;}">
+          Lázaro Cabrerizo, Javier</td>
+        <td><code>10.13.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;hugomalavefp&quot;}">
+          <span style="font-family: Liberation Serif;">hugomalavefp</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Malavé, Hugo&quot;}">
+          Malavé, Hugo</td>
+        <td><code>10.14.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;marcmalavefp23&quot;}">
+          <span style="font-family: Liberation Serif;">marcmalavefp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Malavé Boloix, Marc&quot;}">
+          Malavé Boloix, Marc</td>
+        <td><code>10.15.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;pablomorenofp25&quot;}">
+          <span style="font-family: Liberation Serif;">pablomorenofp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Moreno Martinez, Pablo&quot;}">
+          Moreno Martinez, Pablo</td>
+        <td><code>10.16.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;adrianmunozfp23&quot;}">
+          <span style="font-family: Liberation Serif;">adrianmunozfp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Muñoz Azevedo, Adrián&quot;}">
+          Muñoz Azevedo, Adrián</td>
+        <td><code>10.17.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;bielnietofp25&quot;}">
+          <span style="font-family: Liberation Serif;">bielnietofp25</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Nieto Pavon, Biel&quot;}">
+          Nieto Pavon, Biel</td>
+        <td><code>10.18.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;jesicaperezfp24&quot;}">
+          <span style="font-family: Liberation Serif;">jesicaperezfp24</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Pérez Valenzuela, Jésica&quot;}">
+          Pérez Valenzuela, Jésica</td>
+        <td><code>10.19.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;lucaspinafp&quot;}">
+          <span style="font-family: Liberation Serif;">lucaspinafp</span></td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Piña Rueda, Lucas&quot;}">
+          Piña Rueda, Lucas</td>
+        <td><code>10.20.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;jimmyarmandoquishpifp25&quot;}">
+          <span
+            style="font-family: Liberation Serif;">jimmyarmandoquishpifp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Quishpi Auqui, Jimmy Armando&quot;}">
+          Quishpi Auqui, Jimmy Armando</td>
+        <td><code>10.21.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;dieferraulrodriguezfp23&quot;}">
+          <span
+            style="font-family: Liberation Serif;">dieferraulrodriguezfp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Rodríguez Amaya, Diefer Raul&quot;}">
+          Rodríguez Amaya, Diefer Raul</td>
+        <td><code>10.22.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;marcosadrianrojasfp25&quot;}">
+          <span
+            style="font-family: Liberation Serif;">marcosadrianrojasfp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Rojas Barrios, Marcos Adrian&quot;}">
+          Rojas Barrios, Marcos Adrian</td>
+        <td><code>10.23.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>24</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;marcsanchezfp24&quot;}">
+          <span style="font-family: Liberation Serif;">marcsanchezfp24</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Sánchez Martínez, Marc&quot;}">
+          Sánchez Martínez, Marc</td>
+        <td><code>10.24.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;ericserranofp23&quot;}">
+          <span style="font-family: Liberation Serif;">ericserranofp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Serrano Rodriguez, Èric&quot;}">
+          Serrano Rodriguez, Èric</td>
+        <td><code>10.25.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>26</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;manelsoutofp23&quot;}">
+          <span style="font-family: Liberation Serif;">manelsoutofp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Souto Murillo, Manel&quot;}">
+          Souto Murillo, Manel</td>
+        <td><code>10.26.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>27</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;adriatorresviguin&quot;}">
+          <span style="font-family: Liberation Serif;">adriatorresviguin</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Torres Viguin, Adrià&quot;}">
+          Torres Viguin, Adrià</td>
+        <td><code>10.27.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>28</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;danivelascofp23&quot;}">
+          <span style="font-family: Liberation Serif;">danivelascofp23</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Velasco Martin, Dani&quot;}">
+          Velasco Martin, Dani</td>
+        <td><code>10.28.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>29</td>
+        <td align="left" height="32"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;oriolvinyetsfp25&quot;}">
+          <span style="font-family: Liberation Serif;">oriolvinyetsfp25</span>
+        </td>
+        <td align="left" height="17"
+          data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;Vinyets Janes, Oriol&quot;}">
+          Vinyets Janes, Oriol</td>
+        <td><code>10.29.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>30</td>
+        <td> </td>
+        <td> </td>
+        <td><code>10.30.0.0/16</code></td>
+      </tr>
+      <tr>
+        <td>31</td>
+        <td> </td>
+        <td> </td>
+        <td><code>10.31.0.0/16</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <h3>3. El disseny de xarxa de les delegacions</h3>
+  <p>Tots els edificis de VirtualCorp tindran quatre plantes i una distribució
+    de xarxa comuna. Aquesta uniformitat permetrà reutilitzar configuracions,
+    automatitzar desplegaments i facilitar la gestió de les diferents seus.</p>
+  <p>Cada delegació disposarà de quatre routers MikroTik, que permetran
+    interconnectar les diferents plantes i establir la comunicació amb la resta
+    de la infraestructura.</p>
+  <h4>3.1. Adreçament de les plantes</h4>
+  <p>Dins del rang assignat a cada delegació, es reservarà una xarxa /24 per a
+    cadascuna de les plantes.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Zona</th>
+        <th>Rang de xarxa</th>
+        <th>Ús previst</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Planta baixa</td>
+        <td><code>10.xx.0.0/24</code></td>
+        <td>CPD, DMZ, consergeria i expositors</td>
+      </tr>
+      <tr>
+        <td>Planta 1</td>
+        <td><code>10.xx.1.0/24</code></td>
+        <td>Equips de desenvolupament i projectes</td>
+      </tr>
+      <tr>
+        <td>Planta 2</td>
+        <td><code>10.xx.2.0/24</code></td>
+        <td>Equips de desenvolupament i projectes</td>
+      </tr>
+      <tr>
+        <td>Planta 3</td>
+        <td><code>10.xx.3.0/24</code></td>
+        <td>Departaments corporatius i direcció</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>En aquesta documentació, <code>xx</code> representa el número de la
+    delegació. Per exemple, a la delegació 12, la xarxa de la planta 1 serà
+    <code>10.12.1.0/24</code>.</p>
+  <h4>3.2. Subxarxes de la planta baixa</h4>
+  <p>La planta baixa tindrà una estructura de xarxa més complexa, ja que
+    inclourà el CPD, els serveis públics i diferents zones d'accés.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Zona</th>
+        <th>Subxarxa</th>
+        <th>Ús previst</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Zona general de planta baixa</td>
+        <td><code>10.xx.0.0/25</code></td>
+        <td>Consergeria, expositors i altres equips</td>
+      </tr>
+      <tr>
+        <td>Zona privada</td>
+        <td><code>10.xx.0.128/26</code></td>
+        <td>Serveis interns i equips protegits</td>
+      </tr>
+      <tr>
+        <td>DMZ</td>
+        <td><code>10.xx.0.192/27</code></td>
+        <td>Serveis exposats a Internet</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-secondary"><strong>Recordatori:</strong> Les subxarxes
+    anteriors formen part de la xarxa de la planta baixa. Haureu de respectar
+    les màscares, els rangs i les adreces reservades durant la configuració dels
+    equips i dels serveis.</div>
+  <h4>3.3. Enllaços entre routers</h4>
+  <p>Els quatre routers de la delegació s'anomenaran <code>router0</code>,
+    <code>router1</code>, <code>router2</code> i <code>router3</code>.</p>
+  <p>Els enllaços entre routers utilitzaran xarxes punt a punt amb màscara
+    <code>/30</code>.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Enllaç</th>
+        <th>Subxarxa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>router0 - router1</code></td>
+        <td><code>10.xx.0.224/30</code></td>
+      </tr>
+      <tr>
+        <td><code>router1 - router2</code></td>
+        <td><code>10.xx.0.228/30</code></td>
+      </tr>
+      <tr>
+        <td><code>router2 - router3</code></td>
+        <td><code>10.xx.0.232/30</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>La distribució exacta de les interfícies, les adreces de cada extrem,
+    l'assignació de les plantes als routers i el protocol d'encaminament es
+    concretaran durant el disseny de la topologia.</p>
+  <hr>
+  <h3>4. El CPD de la delegació</h3>
+  <p>El punt d'entrada de la connexió amb l'ISP estarà situat a la planta baixa.
+    En aquesta planta també s'instal·larà el <strong>Centre de Processament de
+      Dades (CPD)</strong> de la delegació.</p>
+  <p>El CPD haurà d'allotjar els serveis necessaris per al funcionament de
+    l'empresa, tant els serveis interns com els serveis accessibles des d'altres
+    xarxes o des d'Internet.</p>
+  <p>VirtualCorp vol aprofitar les tecnologies actuals per millorar l'ús dels
+    recursos, simplificar el manteniment, facilitar les còpies de seguretat i
+    permetre el creixement de la infraestructura.</p>
+  <p>La distribució final de la infraestructura i dels serveis haurà de ser
+    objecte d'una fase de disseny. Les decisions adoptades hauran d'estar
+    justificades i documentades.</p>
+  <h4>4.1. Dotació inicial de maquinari</h4>
+  <p>Cada delegació rebrà inicialment la dotació següent:</p>
+  <ul>
+    <li>4 routers MikroTik.</li>
+    <li>2 servidors orientats a processos:
+      <ul>
+        <li>1 servidor orientat als serveis de la DMZ.</li>
+        <li>1 servidor orientat als serveis de la zona privada.</li>
+      </ul>
+    </li>
+    <li>1 servidor orientat a bases de dades.</li>
+    <li>1 servidor orientat a fitxers i documentació corporativa.</li>
+    <li>Diversos ordinadors d'usuari.</li>
+    <li>4 impressores de xarxa.</li>
+    <li>Els switches, el cablejat i els elements de xarxa necessaris.</li>
+  </ul>
+  <p>Aquesta dotació constitueix el punt de partida del projecte. Durant la fase
+    de disseny haureu d'analitzar com organitzar els recursos disponibles per
+    oferir els serveis requerits de manera eficient, segura i ampliable.</p>
+  <h4>4.2. Serveis que cal implantar</h4>
+  <p>La infraestructura de la delegació haurà d'oferir, com a mínim, els serveis
+    següents. La distribució dels serveis entre els recursos disponibles es
+    decidirà durant el projecte.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Àmbit</th>
+        <th>Serveis requerits</th>
+        <th>Finalitat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Infraestructura de xarxa</td>
+        <td>DNS, DHCP, NTP i altres serveis bàsics de xarxa</td>
+        <td>Proporcionar la configuració i els serveis fonamentals per al
+          funcionament de la xarxa.</td>
+      </tr>
+      <tr>
+        <td>Directori corporatiu</td>
+        <td>Servei de directori, autenticació i gestió centralitzada d'usuaris i
+          equips</td>
+        <td>Centralitzar la identitat dels usuaris i facilitar l'administració
+          dels sistemes.</td>
+      </tr>
+      <tr>
+        <td>Serveis web</td>
+        <td>Servidor web públic i intranet corporativa</td>
+        <td>Publicar continguts externs i proporcionar serveis interns als
+          treballadors.</td>
+      </tr>
+      <tr>
+        <td>Bases de dades</td>
+        <td>Servei de bases de dades corporatiu</td>
+        <td>Emmagatzemar i gestionar la informació utilitzada per les
+          aplicacions de l'empresa.</td>
+      </tr>
+      <tr>
+        <td>Fitxers i documents</td>
+        <td>Emmagatzematge de fitxers i servidor documental corporatiu</td>
+        <td>Facilitar l'accés compartit i controlat als documents i recursos de
+          l'empresa.</td>
+      </tr>
+      <tr>
+        <td>Serveis multimèdia</td>
+        <td>Servei de streaming</td>
+        <td>Oferir continguts multimèdia, demostracions i altres recursos
+          audiovisuals de VirtualCorp.</td>
+      </tr>
+      <tr>
+        <td>Impressió</td>
+        <td>Serveis d'impressió de xarxa</td>
+        <td>Permetre la gestió i l'accés a les impressores de les diferents
+          plantes.</td>
+      </tr>
+      <tr>
+        <td>Administració de sistemes</td>
+        <td>Accés remot, monitorització, registre d'esdeveniments i gestió dels
+          sistemes</td>
+        <td>Facilitar l'administració, la supervisió i la resolució
+          d'incidències.</td>
+      </tr>
+      <tr>
+        <td>Seguretat i còpies</td>
+        <td>Còpies de seguretat i procediments de recuperació</td>
+        <td>Protegir la informació i garantir la recuperació dels serveis davant
+          d'errors o incidents.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-warning"><strong>Important:</strong> La llista
+    anterior defineix els serveis que s'han d'oferir, però no determina encara
+    com s'han d'organitzar dins de la infraestructura. La distribució, les
+    dependències, els recursos assignats i les decisions tècniques s'hauran de
+    justificar en el disseny del CPD.</div>
+  <h4>4.3. Adreces IP inicials del CPD</h4>
+  <p>Les adreces següents estan reservades per als principals sistemes del CPD.
+    Aquestes assignacions s'han de respectar durant el projecte.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Hostname</th>
+        <th>Descripció</th>
+        <th>Adreça IP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>pve01</code></td>
+        <td>Node principal de la infraestructura Proxmox</td>
+        <td><code>10.xx.0.133</code></td>
+      </tr>
+      <tr>
+        <td><code>dbsrv</code></td>
+        <td>Servidor de bases de dades</td>
+        <td><code>10.xx.0.134</code></td>
+      </tr>
+      <tr>
+        <td><code>infosrv</code></td>
+        <td>Servidor documental i de fitxers corporatius</td>
+        <td><code>10.xx.0.135</code></td>
+      </tr>
+      <tr>
+        <td><code>websrv</code></td>
+        <td>Servidor web públic</td>
+        <td><code>10.xx.0.197</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Les adreces IP s'han d'interpretar d'acord amb el número de la delegació.
+    Per exemple, en una delegació amb identificador 12, l'adreça de
+    <code>pve01</code> serà <code>10.12.0.133</code>.</p>
+  <p>La resta de serveis hauran de disposar d'un esquema d'adreçament coherent
+    amb les subxarxes definides. Les adreces addicionals, les reserves DHCP i
+    les correspondències entre noms i adreces s'hauran de recollir en la
+    documentació de la infraestructura.</p>
+  <hr>
+  <h3>5. Els usuaris i els equips de la delegació</h3>
+  <h4>5.1. Planta baixa: recepció i expositors</h4>
+  <p>A la planta baixa hi haurà quatre expositors informàtics que mostraran els
+    últims projectes de l'empresa als visitants. Aquests equips funcionaran amb
+    Linux i tindran les identificacions següents:</p>
+  <ul>
+    <li><code>expo1</code> — <code>10.xx.0.33</code></li>
+    <li><code>expo2</code> — <code>10.xx.0.34</code></li>
+    <li><code>expo3</code> — <code>10.xx.0.35</code></li>
+    <li><code>expo4</code> — <code>10.xx.0.36</code></li>
+  </ul>
+  <p>També hi haurà dos equips Windows per al personal de consergeria:
+    <code>conserge1</code> i <code>conserge2</code>.</p>
+  <p>Aquests equips hauran de disposar de la configuració de xarxa adequada i
+    accedir únicament als serveis que corresponguin a la seva funció.</p>
+  <h4>5.2. Impressores de xarxa</h4>
+  <p>Cada planta disposarà d'una impressora de xarxa gestionada mitjançant un
+    servidor d'impressió. Els servidors s'anomenaran segons el patró següent:
+  </p>
+  <ul>
+    <li><code>printer0</code> — impressora de la planta baixa</li>
+    <li><code>printer1</code> — impressora de la planta 1</li>
+    <li><code>printer2</code> — impressora de la planta 2</li>
+    <li><code>printer3</code> — impressora de la planta 3</li>
+  </ul>
+  <p>L'adreça IP prevista per als servidors d'impressió serà
+    <code>10.xx.n.65</code>, on <code>n</code> identifica la planta.</p>
+  <h4>5.3. Plantes 1 i 2: equips de desenvolupament</h4>
+  <p>Les plantes 1 i 2 estaran destinades als equips de desenvolupament de
+    programari. Es preveu un màxim de 50 desenvolupadors, que treballaran
+    principalment amb ordinadors portàtils.</p>
+  <p>Com que els desenvolupadors no tindran un lloc fix, la xarxa haurà de
+    permetre una assignació dinàmica d'adreces IP i una connectivitat adequada
+    des de qualsevol lloc de treball autoritzat.</p>
+  <p>Cada projecte de desenvolupament requerirà, a més, dos serveis propis:</p>
+  <ul>
+    <li>Un servidor web del projecte.</li>
+    <li>Un servidor de dades del projecte.</li>
+  </ul>
+  <p>Aquests serveis tindran adreces IP fixes i estaran associats al projecte
+    corresponent.</p>
+  <p>Inicialment es preveuen:</p>
+  <ul>
+    <li>Dos projectes de desenvolupament a la planta 1.</li>
+    <li>Un projecte de desenvolupament a la planta 2.</li>
+  </ul>
+  <p>La implantació d'aquests serveis haurà de tenir en compte la segmentació de
+    la xarxa, els permisos d'accés, la seguretat i la possibilitat d'ampliar el
+    nombre de projectes en el futur.</p>
+  <h4>5.4. Planta 3: departaments corporatius i direcció</h4>
+  <p>A la planta 3 s'ubicaran els departaments comercials, de gestió, màrqueting
+    i l'equip directiu. Els usuaris d'aquests departaments utilitzaran
+    principalment ordinadors portàtils amb Windows.</p>
+  <p>Per raons de seguretat, els equips de direcció hauran de disposar d'una
+    xarxa local aïllada de la resta d'usuaris de la planta.</p>
+  <p>En aquesta delegació, l'equip directiu estarà format per tres persones. Els
+    seus equips hauran de poder accedir als serveis autoritzats de l'empresa,
+    però no hauran de compartir directament la xarxa local amb els equips dels
+    altres departaments.</p>
+  <hr>
+  <h3>6. Documentació de la infraestructura</h3>
+  <div class="alert alert-danger"><strong>La documentació és una part essencial
+      del projecte.</strong> No es tracta simplement de demostrar que heu fet
+    una pràctica, sinó de generar documentació tècnica útil per a un departament
+    de serveis informàtics real.</div>
+  <p>En una empresa, una infraestructura no es pot considerar correctament
+    implantada si només funciona en el moment de la seva instal·lació. Cal que
+    altres tècnics puguin entendre-la, administrar-la, mantenir-la, ampliar-la i
+    recuperar-la sense dependre de la persona que la va configurar.</p>
+  <p>Per aquest motiu, haureu de crear i mantenir un <strong>document tècnic de
+      la infraestructura de la vostra delegació</strong>. Aquest document haurà
+    de reflectir les decisions adoptades, la configuració real, els serveis
+    disponibles i els procediments necessaris per administrar el sistema.</p>
+  <h4>6.1. Què NO és el lliurament de documentació?</h4>
+  <p>El lliurament no ha de consistir en:</p>
+  <ul>
+    <li>Una col·lecció de captures de pantalla.</li>
+    <li>Un document que simplement descrigui, pas a pas, tot el que heu fet.
+    </li>
+    <li>Un conjunt d'evidències desordenades de les pràctiques realitzades.</li>
+    <li>Una còpia dels apunts o de la documentació oficial dels programes.</li>
+    <li>Un informe que només expliqui que els serveis funcionen.</li>
+  </ul>
+  <p>Les captures de pantalla, les proves i les evidències poden ser útils per
+    justificar determinades decisions o verificacions, però no constitueixen
+    l'objectiu principal de la documentació.</p>
+  <h4>6.2. Què ha de contenir la documentació?</h4>
+  <p>El document haurà de tenir l'estructura i el nivell de detall propis de la
+    documentació elaborada per un departament professional de sistemes i serveis
+    informàtics.</p>
+  <p>Com a mínim, haurà d'incloure els apartats següents:</p>
+  <h5>A. Descripció general de la infraestructura</h5>
+  <ul>
+    <li>Objectiu i abast de la infraestructura.</li>
+    <li>Descripció general de la delegació.</li>
+    <li>Criteris i decisions principals de disseny.</li>
+    <li>Relació amb la infraestructura corporativa de VirtualCorp.</li>
+  </ul>
+  <h5>B. Topologia i adreçament de xarxa</h5>
+  <ul>
+    <li>Diagrama físic de la xarxa.</li>
+    <li>Diagrama lògic de la xarxa.</li>
+    <li>Distribució de les plantes i les zones de xarxa.</li>
+    <li>Assignació dels routers i les seves interfícies.</li>
+    <li>Taula completa d'adreçament IP.</li>
+    <li>Enllaços entre routers i encaminament.</li>
+    <li>Rutes, passarel·les i altres paràmetres rellevants.</li>
+  </ul>
+  <h5>C. Inventari de sistemes i serveis</h5>
+  <ul>
+    <li>Inventari dels equips i sistemes de la delegació.</li>
+    <li>Identificació dels servidors i dels serveis que ofereixen.</li>
+    <li>Assignació de noms, adreces IP i funcions.</li>
+    <li>Relacions i dependències entre serveis.</li>
+    <li>Recursos assignats i criteris de dimensionament.</li>
+  </ul>
+  <h5>D. Configuració dels serveis</h5>
+  <ul>
+    <li>Configuració del servei DNS.</li>
+    <li>Configuració del servei DHCP.</li>
+    <li>Configuració del directori corporatiu i l'autenticació.</li>
+    <li>Configuració dels serveis web i de la intranet.</li>
+    <li>Configuració dels serveis de bases de dades.</li>
+    <li>Configuració dels serveis de fitxers i documents.</li>
+    <li>Configuració del servei de streaming.</li>
+    <li>Configuració dels serveis d'impressió.</li>
+    <li>Altres serveis implantats durant el projecte.</li>
+  </ul>
+  <h5>E. Seguretat i control d'accés</h5>
+  <ul>
+    <li>Segmentació de la xarxa.</li>
+    <li>Configuració de la DMZ.</li>
+    <li>Polítiques d'accés entre xarxes i serveis.</li>
+    <li>Protecció dels serveis exposats a Internet.</li>
+    <li>Gestió d'usuaris, grups i permisos.</li>
+    <li>Mesures de protecció dels equips de direcció.</li>
+  </ul>
+  <h5>F. Automatització i administració</h5>
+  <ul>
+    <li>Estructura del repositori del projecte.</li>
+    <li>Procediments d'instal·lació i configuració automatitzats.</li>
+    <li>Inventari i variables d'automatització.</li>
+    <li>Descripció dels playbooks, scripts o altres eines utilitzades.</li>
+    <li>Requisits previs per reproduir el desplegament.</li>
+    <li>Procediment per actualitzar o ampliar la infraestructura.</li>
+  </ul>
+  <h5>G. Còpies de seguretat i recuperació</h5>
+  <ul>
+    <li>Informació i configuracions que cal protegir.</li>
+    <li>Política de còpies de seguretat.</li>
+    <li>Ubicació i organització de les còpies.</li>
+    <li>Procediments de restauració.</li>
+    <li>Proves de recuperació realitzades.</li>
+  </ul>
+  <h5>H. Operació i manteniment</h5>
+  <ul>
+    <li>Procediments habituals d'administració.</li>
+    <li>Procediments d'arrencada i aturada dels serveis.</li>
+    <li>Procediments de manteniment.</li>
+    <li>Monitorització i comprovació de l'estat dels sistemes.</li>
+    <li>Resolució de les incidències més habituals.</li>
+    <li>Procediments d'ampliació de la infraestructura.</li>
+  </ul>
+  <h5>I. Proves i validació</h5>
+  <ul>
+    <li>Proves de connectivitat.</li>
+    <li>Proves de resolució de noms.</li>
+    <li>Proves d'assignació d'adreces IP.</li>
+    <li>Proves de funcionament dels serveis.</li>
+    <li>Proves de comunicació entre xarxes.</li>
+    <li>Proves de seguretat i control d'accés.</li>
+    <li>Incidències detectades i solucions aplicades.</li>
+  </ul>
+  <h4>6.3. Característiques de la documentació</h4>
+  <p>La documentació haurà de complir els criteris següents:</p>
+  <ul>
+    <li><strong>Precisió:</strong> ha de descriure la configuració real de la
+      infraestructura, no una configuració teòrica.</li>
+    <li><strong>Claredat:</strong> ha de poder ser consultada per un altre
+      tècnic sense necessitat d'explicacions addicionals.</li>
+    <li><strong>Coherència:</strong> els diagrames, les taules, els noms, les
+      adreces IP i les configuracions han de coincidir.</li>
+    <li><strong>Actualització:</strong> s'ha de mantenir actualitzada durant tot
+      el projecte, no redactar-la únicament al final.</li>
+    <li><strong>Reproduïbilitat:</strong> ha de permetre reconstruir o ampliar
+      la infraestructura seguint els procediments descrits.</li>
+    <li><strong>Orientació professional:</strong> ha de tenir l'estructura i el
+      nivell de detall d'una documentació tècnica real.</li>
+  </ul>
+  <div class="alert alert-success"><strong>Objectiu de la documentació:</strong>
+    Si demà un altre tècnic s'incorporés al departament d'informàtica de
+    VirtualCorp, hauria de poder entendre la infraestructura, administrar els
+    serveis, resoldre incidències i executar tasques de manteniment consultant
+    el vostre document.</div>
+  <hr>
+  <h3>7. Objectius generals del projecte</h3>
+  <p>Al llarg del projecte haureu de convertir aquesta especificació inicial en
+    una infraestructura funcional, segura, automatitzada i documentada.</p>
+  <p>Entre d'altres, el projecte haurà d'abordar els objectius següents:</p>
+  <ul>
+    <li>Dissenyar la topologia física i lògica de la xarxa.</li>
+    <li>Configurar els routers MikroTik i els seus enllaços.</li>
+    <li>Definir i implementar l'adreçament IP de la delegació.</li>
+    <li>Configurar els serveis DNS i DHCP.</li>
+    <li>Implantar el directori corporatiu i els mecanismes d'autenticació.</li>
+    <li>Implantar els serveis web, d'intranet, bases de dades i fitxers.</li>
+    <li>Implantar el servei de streaming.</li>
+    <li>Configurar els serveis d'impressió de xarxa.</li>
+    <li>Desplegar i administrar la infraestructura de sistemes.</li>
+    <li>Aplicar mesures de segmentació i seguretat de xarxa.</li>
+    <li>Automatitzar les tasques d'instal·lació i configuració amb eines
+      adequades.</li>
+    <li>Establir un sistema de còpies de seguretat i recuperació.</li>
+    <li>Documentar la infraestructura, les configuracions i els procediments.
+    </li>
+    <li>Validar el funcionament dels serveis mitjançant proves planificades.
+    </li>
+    <li>Preparar la infraestructura per al manteniment i el creixement futur.
+    </li>
+  </ul>
+  <h3>8. La filosofia del projecte</h3>
+  <p>VirtualCorp no vol simplement una col·lecció de sistemes que funcionin el
+    dia de la presentació.</p>
+  <p>Vol una infraestructura coherent, segura, ampliable i fàcil d'administrar.
+    Vol que els serveis es puguin desplegar de manera reproduïble, que les
+    incidències es puguin diagnosticar i que qualsevol tècnic pugui entendre com
+    funciona la delegació.</p>
+  <p>Durant el projecte haureu de prendre decisions tècniques, justificar-les,
+    implementar-les, provar-les i deixar-ne constància en una documentació
+    professional.</p>
+  <div class="alert alert-info"><strong>El resultat final no serà només una
+      infraestructura que funciona.</strong> Serà una infraestructura que es pot
+    entendre, administrar, mantenir, recuperar i ampliar.</div>
+</div>
