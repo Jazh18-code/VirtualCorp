@@ -45,6 +45,10 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+log_error() {
+    log_err "$@"
+}
+
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $*"
 }

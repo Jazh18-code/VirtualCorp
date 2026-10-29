@@ -4,6 +4,7 @@ endif
 
 include .env
 
+export DELEGATION_ID NET_PREFIX
 export PROJECT_ROOT ARTIFACTS_DIR CONFIGS_DIR SSH_PUBLIC_KEY_DIR SSH_PRIVATE_KEY_DIR
 export ROUTEROS_VERSION ROUTEROS_VDI_FILENAME ROUTEROS_VDI_PATH ROUTEROS_BOX_NAME ROUTEROS_BOX_FILE
 export VBOX_ROOT_GROUP VM_ROUTERS_GROUP VM_TEMPLATES_GROUP VBOXMANAGE_BIN
@@ -11,7 +12,7 @@ export VBOX_ROOT_GROUP VM_ROUTERS_GROUP VM_TEMPLATES_GROUP VBOXMANAGE_BIN
 BASH_DIR := $(PROJECT_ROOT)/infrastructure/bash
 BOOTSTRAP_DIR := $(PROJECT_ROOT)/automation/scripts/bootstrap
 
-.PHONY: help deploy-routers delete-routers reset-routers reset_routers ssh-keys routeros-box
+.PHONY: help validate validate-reboot deploy-routers delete-routers reset-routers reset_routers ssh-keys routeros-box
 
 help:
 	@printf '%s\n' \
@@ -20,6 +21,8 @@ help:
 	  '  delete-routers  Delete the router VM group' \
 	  '  reset-routers   Delete and redeploy the router VMs' \
 	  '  ssh-keys        Generate the project SSH keys' \
+	  '  validate        Check router connectivity, internet and SSH access' \
+	  '  validate-reboot Reboot the routers, then validate (persistence)' \
 	  '  routeros-box    Build the RouterOS Vagrant box'
 
 deploy-routers:
@@ -40,3 +43,9 @@ ssh-keys:
 
 routeros-box:
 	"$(BOOTSTRAP_DIR)/create_mikrotik_box.sh"
+
+validate:
+	"$(PROJECT_ROOT)/automation/scripts/validate_routers.sh"
+
+validate-reboot:
+	"$(PROJECT_ROOT)/automation/scripts/validate_routers.sh" --reboot

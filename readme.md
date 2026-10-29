@@ -2,6 +2,8 @@
 
 VirtualCorp is a virtual networking lab for designing and deploying a branch office network. It uses MikroTik RouterOS CHR virtual machines on VirtualBox and automates their setup with shell scripts and Make.
 
+> **Delegació 02 (10.2.0.0/16) – Jhoan A.Z.**: disseny, decisions i validació a [docs/delegacio02.md](docs/delegacio02.md).
+
 Read the [full project statement](docs/statement.html) for the scenario, requirements, and detailed assignment.
 
 ## Getting started

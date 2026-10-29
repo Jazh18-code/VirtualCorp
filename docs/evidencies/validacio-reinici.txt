@@ -1,0 +1,101 @@
+VirtualCorp - Delegació 2 (10.2.0.0/16) - Validació de routers
+Data: 2026-10-28 21:08:32  Reinici previ: true
+==============================================================
+
+### mikrotik0 (10.2.0.225)
+identity=mikrotik0  uptime=00:00:35  version=7.21.4 (long-term)
+Flags: D - DYNAMIC
+Columns: ADDRESS, NETWORK, INTERFACE, VRF
+#   ADDRESS        NETWORK     INTERFACE  VRF 
+0   10.2.0.225/30  10.2.0.224  ether2     main
+1   10.2.0.193/27  10.2.0.192  ether3     main
+2   10.2.0.129/26  10.2.0.128  ether4     main
+3 D 10.0.2.15/24   10.0.2.0    ether1     main
+-- Connectivitat entre routers
+  [OK]   ping mikrotik1 10.2.0.226      sent=3 received=3 packet-loss=0% min-rtt=695us avg-rtt=762us 
+  [OK]   ping mikrotik2 10.2.0.230      sent=3 received=3 packet-loss=0% min-rtt=448us avg-rtt=990us 
+  [OK]   ping mikrotik3 10.2.0.234      sent=3 received=3 packet-loss=0% min-rtt=1ms575us avg-rtt=1ms804us 
+-- Sortida a Internet
+  [OK]   ping 1.1.1.1      sent=3 received=3 packet-loss=0% min-rtt=14ms64us avg-rtt=14ms261us 
+  [OK]   DNS www.google.com -> 142.251.154.119  
+  [OK]   ping www.google.com      sent=3 received=3 packet-loss=0% min-rtt=14ms315us avg-rtt=14ms474us 
+-- Accés SSH
+  [OK]   sysadmin amb clau personal (vcorp_sysadmin)  
+  [OK]   clau del professor instal·lada a l'usuari auditor  
+  [OK]   clau personal instal·lada a l'usuari sysadmin  
+0 EX comment=system default user name=admin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:02:15
+1    comment=sysadmin user name=sysadmin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:08:42
+2    comment=VirtualCorp auditor (professor) name=auditor group=full inactivity-timeout=10m inactivity-policy=none address=
+
+### mikrotik1 (10.2.0.226)
+identity=mikrotik1  uptime=00:00:51  version=7.21.4 (long-term)
+Columns: ADDRESS, NETWORK, INTERFACE, VRF
+# ADDRESS        NETWORK     INTERFACE  VRF 
+0 10.2.0.226/30  10.2.0.224  ether2     main
+1 10.2.0.229/30  10.2.0.228  ether3     main
+2 10.2.0.1/25    10.2.0.0    ether4     main
+-- Connectivitat entre routers
+  [OK]   ping mikrotik0 10.2.0.225      sent=3 received=3 packet-loss=0% min-rtt=69us avg-rtt=603us 
+  [OK]   ping mikrotik2 10.2.0.230      sent=3 received=3 packet-loss=0% min-rtt=514us avg-rtt=625us 
+  [OK]   ping mikrotik3 10.2.0.234      sent=3 received=3 packet-loss=0% min-rtt=1ms4us avg-rtt=1ms117us 
+-- Sortida a Internet
+  [OK]   ping 1.1.1.1      sent=3 received=3 packet-loss=0% min-rtt=17ms66us avg-rtt=18ms101us 
+  [OK]   DNS www.google.com -> 142.251.152.119  
+  [OK]   ping www.google.com      sent=3 received=3 packet-loss=0% min-rtt=16ms353us avg-rtt=17ms435us 
+-- Accés SSH
+  [OK]   sysadmin amb clau personal (vcorp_sysadmin)  
+  [OK]   clau del professor instal·lada a l'usuari auditor  
+  [OK]   clau personal instal·lada a l'usuari sysadmin  
+0 EX comment=system default user name=admin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:02:55
+1    comment=sysadmin user name=sysadmin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:08:57
+2    comment=VirtualCorp auditor (professor) name=auditor group=full inactivity-timeout=10m inactivity-policy=none address=
+
+### mikrotik2 (10.2.0.230)
+identity=mikrotik2  uptime=00:01:08  version=7.21.4 (long-term)
+Columns: ADDRESS, NETWORK, INTERFACE, VRF
+# ADDRESS        NETWORK     INTERFACE  VRF 
+0 10.2.0.230/30  10.2.0.228  ether2     main
+1 10.2.0.233/30  10.2.0.232  ether3     main
+2 10.2.1.1/24    10.2.1.0    ether4     main
+3 10.2.2.1/24    10.2.2.0    ether5     main
+-- Connectivitat entre routers
+  [OK]   ping mikrotik0 10.2.0.225      sent=3 received=3 packet-loss=0% min-rtt=1ms116us avg-rtt=1ms362us 
+  [OK]   ping mikrotik1 10.2.0.226      sent=3 received=3 packet-loss=0% min-rtt=357us avg-rtt=597us 
+  [OK]   ping mikrotik3 10.2.0.234      sent=3 received=3 packet-loss=0% min-rtt=654us avg-rtt=706us 
+-- Sortida a Internet
+  [OK]   ping 1.1.1.1      sent=3 received=3 packet-loss=0% min-rtt=17ms418us avg-rtt=18ms44us 
+  [OK]   DNS www.google.com -> 142.251.151.119  
+  [OK]   ping www.google.com      sent=3 received=3 packet-loss=0% min-rtt=20ms211us avg-rtt=20ms642us 
+-- Accés SSH
+  [OK]   sysadmin amb clau personal (vcorp_sysadmin)  
+  [OK]   clau del professor instal·lada a l'usuari auditor  
+  [OK]   clau personal instal·lada a l'usuari sysadmin  
+0 EX comment=system default user name=admin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:03:35
+1    comment=sysadmin user name=sysadmin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:09:12
+2    comment=VirtualCorp auditor (professor) name=auditor group=full inactivity-timeout=10m inactivity-policy=none address=
+
+### mikrotik3 (10.2.0.234)
+identity=mikrotik3  uptime=00:01:25  version=7.21.4 (long-term)
+Columns: ADDRESS, NETWORK, INTERFACE, VRF
+# ADDRESS        NETWORK     INTERFACE  VRF 
+0 10.2.0.234/30  10.2.0.232  ether2     main
+1 10.2.3.1/25    10.2.3.0    ether3     main
+2 10.2.3.129/25  10.2.3.128  ether4     main
+-- Connectivitat entre routers
+  [OK]   ping mikrotik0 10.2.0.225      sent=3 received=3 packet-loss=0% min-rtt=1ms434us avg-rtt=1ms679us 
+  [OK]   ping mikrotik1 10.2.0.226      sent=3 received=3 packet-loss=0% min-rtt=601us avg-rtt=968us 
+  [OK]   ping mikrotik2 10.2.0.230      sent=3 received=3 packet-loss=0% min-rtt=352us avg-rtt=574us 
+-- Sortida a Internet
+  [OK]   ping 1.1.1.1      sent=3 received=3 packet-loss=0% min-rtt=16ms175us avg-rtt=57ms485us 
+  [OK]   DNS www.google.com -> 142.251.153.119  
+  [OK]   ping www.google.com      sent=3 received=3 packet-loss=0% min-rtt=17ms722us avg-rtt=17ms936us 
+-- Accés SSH
+  [OK]   sysadmin amb clau personal (vcorp_sysadmin)  
+  [OK]   clau del professor instal·lada a l'usuari auditor  
+  [OK]   clau personal instal·lada a l'usuari sysadmin  
+0 EX comment=system default user name=admin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:04:16
+1    comment=sysadmin user name=sysadmin group=full inactivity-timeout=10m inactivity-policy=none address= last-logged-in=2026-10-28 21:09:27
+2    comment=VirtualCorp auditor (professor) name=auditor group=full inactivity-timeout=10m inactivity-policy=none address=
+
+==============================================================
+RESULTAT: totes les comprovacions correctes
