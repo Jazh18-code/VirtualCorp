@@ -91,10 +91,11 @@ Per no escriure-ho tot he fet el fitxer `configs/ssh/ssh_config`, i llavors nom�
 ssh -F configs/ssh/ssh_config mikrotik2
 ```
 
-El professor pot entrar igual però amb la seva clau i l'usuari `auditor`:
+El professor pot entrar igual però amb la seva clau i l'usuari `auditor`. El port 2200 només escolta a 127.0.0.1, així que s'ha de fer des del meu PC (per exemple a classe):
 
 ```bash
-ssh -i vcorp_auditor -J auditor@<ip_del_pc>:2200 auditor@10.2.0.226
+ssh -i vcorp_auditor -p 2200 auditor@127.0.0.1
+ssh -i vcorp_auditor -J auditor@127.0.0.1:2200 auditor@10.2.0.226
 ```
 
 ## 3. Com es desplega
