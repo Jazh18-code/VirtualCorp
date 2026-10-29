@@ -42,15 +42,26 @@ Els routers `router0..3` de l'enunciat s'implementen com les VM `mikrotik0..3`
 Cada nom de la columna és la xarxa interna de VirtualBox (`intnet`) a la qual
 està connectada la NIC.
 
-```
- Internet
-    │ (NAT VirtualBox 10.0.2.0/24)
- ┌──┴────────┐ 10.2.0.224/30 ┌───────────┐ 10.2.0.228/30 ┌───────────┐ 10.2.0.232/30 ┌───────────┐
- │ mikrotik0 ├───────────────┤ mikrotik1 ├───────────────┤ mikrotik2 ├───────────────┤ mikrotik3 │
- └─┬───────┬─┘ .225     .226 └─────┬─────┘ .229     .230 └──┬─────┬──┘ .233     .234 └──┬─────┬──┘
-   │       │                       │                        │     │                     │     │
-  DMZ   Privada/CPD            Planta 0                 Planta 1 Planta 2          Planta 3  Direcció
- .192/27  .128/26              .0/25                   10.2.1/24 10.2.2/24         .3.0/25  .3.128/25
+```mermaid
+flowchart LR
+    INET(("Internet"))
+    R0["mikrotik0<br/>(router0)"]
+    R1["mikrotik1<br/>(router1)"]
+    R2["mikrotik2<br/>(router2)"]
+    R3["mikrotik3<br/>(router3)"]
+
+    INET -- "ether1 · NAT VirtualBox<br/>10.0.2.15" --- R0
+    R0 -- "10.2.0.224/30<br/>.225 ↔ .226" --- R1
+    R1 -- "10.2.0.228/30<br/>.229 ↔ .230" --- R2
+    R2 -- "10.2.0.232/30<br/>.233 ↔ .234" --- R3
+
+    R0 --- DMZ["DMZ<br/>10.2.0.192/27<br/>gw .193"]
+    R0 --- PRIV["Privada / CPD<br/>10.2.0.128/26<br/>gw .129"]
+    R1 --- PL0["Planta 0<br/>10.2.0.0/25<br/>gw .1"]
+    R2 --- PL1["Planta 1<br/>10.2.1.0/24<br/>gw .1"]
+    R2 --- PL2["Planta 2<br/>10.2.2.0/24<br/>gw .1"]
+    R3 --- PL3["Planta 3<br/>10.2.3.0/25<br/>gw .1"]
+    R3 --- DIR["Direcció (aïllada)<br/>10.2.3.128/25<br/>gw .129"]
 ```
 
 ### 1.3 Encaminament, NAT i DNS
