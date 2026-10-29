@@ -1,8 +1,8 @@
-# Accés SSH als routers de la delegació 02
-# Ús (des de l'arrel del projecte):  ssh -F configs/ssh/ssh_config mikrotik1
+# Per entrar als routers sense escriure tot el comando:
+#   ssh -F configs/ssh/ssh_config mikrotik1
 #
-# Només mikrotik0 és accessible des del host (port 2200 redirigit per VirtualBox).
-# Als altres s'hi arriba saltant per mikrotik0 (ProxyJump).
+# Des del meu PC nomes arribo al mikrotik0 (port 2200 de VirtualBox),
+# als altres hi entro saltant pel mikrotik0 (ProxyJump)
 
 Host mikrotik0
     HostName 127.0.0.1
@@ -20,7 +20,7 @@ Host mikrotik3
     HostName 10.2.0.234
     ProxyJump mikrotik0
 
-# Opcions comunes
+# per a tots
 Host mikrotik*
     User sysadmin
     IdentityFile ~/.ssh/vcorp_sysadmin

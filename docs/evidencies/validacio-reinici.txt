@@ -1,4 +1,4 @@
-Validació delegació 02 - 2026-10-29 12:53
+Proves delegacio 02 - 2026-10-29 13:17
 
 ===== mikrotik0 =====
                    uptime: 1m32s                      
@@ -10,20 +10,20 @@ Columns: ADDRESS, NETWORK, INTERFACE, VRF
 2   10.2.0.129/26  10.2.0.128  ether4     main
 3 D 10.0.2.15/24   10.0.2.0    ether1     main
 
-ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=58us avg-rtt=87us max-rtt=114us 
-ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=575us avg-rtt=749us 
-ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=988us avg-rtt=1ms133us 
-ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=1ms484us avg-rtt=1ms537us 
-ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=6ms469us avg-rtt=8ms453us 
-ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=13ms379us avg-rtt=13ms600us 
+ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=74us avg-rtt=84us max-rtt=93us 
+ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=577us avg-rtt=710us 
+ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=892us avg-rtt=1ms235us 
+ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=1ms392us avg-rtt=1ms850us 
+ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=6ms864us avg-rtt=13ms829us 
+ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=13ms22us avg-rtt=13ms153us 
 Flags: E - EXPIRED; X - DISABLED
 Columns: NAME, GROUP, LAST-LOGGED-IN, INACTIVITY-POLICY
 #    NAME      GROUP  LAST-LOGGED-IN       INACTIVITY-POLICY
 ;;; system default user
-0 EX admin     full   2026-10-28 21:02:15  none             
+0 EX admin     full   2026-10-29 13:10:44  none             
 ;;; sysadmin user
-1    sysadmin  full   2026-10-29 12:53:21  none             
-;;; VirtualCorp auditor (professor)
+1    sysadmin  full   2026-10-29 13:17:44  none             
+;;; usuari del profe
 2    auditor   full                        none             
 
 Columns: USER, KEY-TYPE, BITS, INFO
@@ -40,20 +40,20 @@ Columns: ADDRESS, NETWORK, INTERFACE, VRF
 1 10.2.0.229/30  10.2.0.228  ether3     main
 2 10.2.0.1/25    10.2.0.0    ether4     main
 
-ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=757us avg-rtt=852us 
-ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=67us avg-rtt=81us max-rtt=98us 
-ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=534us avg-rtt=701us 
-ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=934us avg-rtt=1ms120us 
-ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=6ms888us avg-rtt=7ms730us 
-ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=16ms210us avg-rtt=20ms256us 
+ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=466us avg-rtt=722us 
+ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=73us avg-rtt=79us max-rtt=86us 
+ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=468us avg-rtt=646us 
+ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=1ms133us avg-rtt=1ms394us 
+ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=4ms666us avg-rtt=12ms664us 
+ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=13ms893us avg-rtt=15ms10us 
 Flags: E - EXPIRED; X - DISABLED
 Columns: NAME, GROUP, LAST-LOGGED-IN, INACTIVITY-POLICY
 #    NAME      GROUP  LAST-LOGGED-IN       INACTIVITY-POLICY
 ;;; system default user
-0 EX admin     full   2026-10-28 21:02:55  none             
+0 EX admin     full   2026-10-29 13:11:26  none             
 ;;; sysadmin user
-1    sysadmin  full   2026-10-29 12:53:38  none             
-;;; VirtualCorp auditor (professor)
+1    sysadmin  full   2026-10-29 13:18:00  none             
+;;; usuari del profe
 2    auditor   full                        none             
 
 Columns: USER, KEY-TYPE, BITS, INFO
@@ -71,20 +71,20 @@ Columns: ADDRESS, NETWORK, INTERFACE, VRF
 2 10.2.1.1/24    10.2.1.0    ether4     main
 3 10.2.2.1/24    10.2.2.0    ether5     main
 
-ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=41us avg-rtt=957us 
-ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=365us avg-rtt=531us 
-ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=51us avg-rtt=70us max-rtt=81us 
-ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=300us avg-rtt=656us 
-ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=7ms982us avg-rtt=8ms848us 
-ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=13ms955us avg-rtt=15ms148us 
+ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=35us avg-rtt=777us 
+ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=480us avg-rtt=628us 
+ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=50us avg-rtt=71us max-rtt=84us 
+ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=677us avg-rtt=698us 
+ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=5ms290us avg-rtt=6ms798us 
+ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=15ms654us avg-rtt=16ms225us 
 Flags: E - EXPIRED; X - DISABLED
 Columns: NAME, GROUP, LAST-LOGGED-IN, INACTIVITY-POLICY
 #    NAME      GROUP  LAST-LOGGED-IN       INACTIVITY-POLICY
 ;;; system default user
-0 EX admin     full   2026-10-28 21:03:35  none             
+0 EX admin     full   2026-10-29 13:12:09  none             
 ;;; sysadmin user
-1    sysadmin  full   2026-10-29 12:53:53  none             
-;;; VirtualCorp auditor (professor)
+1    sysadmin  full   2026-10-29 13:18:15  none             
+;;; usuari del profe
 2    auditor   full                        none             
 
 Columns: USER, KEY-TYPE, BITS, INFO
@@ -101,20 +101,20 @@ Columns: ADDRESS, NETWORK, INTERFACE, VRF
 1 10.2.3.1/25    10.2.3.0    ether3     main
 2 10.2.3.129/25  10.2.3.128  ether4     main
 
-ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=744us avg-rtt=1ms356us 
-ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=742us avg-rtt=1ms152us 
-ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=411us avg-rtt=592us 
-ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=79us avg-rtt=113us max-rtt=150us 
-ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=7ms502us avg-rtt=8ms810us 
-ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=15ms413us avg-rtt=16ms642us 
+ping 10.2.0.225:     sent=3 received=3 packet-loss=0% min-rtt=1ms246us avg-rtt=1ms647us 
+ping 10.2.0.226:     sent=3 received=3 packet-loss=0% min-rtt=600us avg-rtt=974us 
+ping 10.2.0.230:     sent=3 received=3 packet-loss=0% min-rtt=449us avg-rtt=672us 
+ping 10.2.0.234:     sent=3 received=3 packet-loss=0% min-rtt=49us avg-rtt=83us max-rtt=118us 
+ping 1.1.1.1:     sent=3 received=3 packet-loss=0% min-rtt=8ms36us avg-rtt=15ms925us 
+ping www.google.com:     sent=3 received=3 packet-loss=0% min-rtt=17ms524us avg-rtt=18ms97us 
 Flags: E - EXPIRED; X - DISABLED
 Columns: NAME, GROUP, LAST-LOGGED-IN, INACTIVITY-POLICY
 #    NAME      GROUP  LAST-LOGGED-IN       INACTIVITY-POLICY
 ;;; system default user
-0 EX admin     full   2026-10-28 21:04:16  none             
+0 EX admin     full   2026-10-29 13:12:51  none             
 ;;; sysadmin user
-1    sysadmin  full   2026-10-29 12:54:09  none             
-;;; VirtualCorp auditor (professor)
+1    sysadmin  full   2026-10-29 13:18:31  none             
+;;; usuari del profe
 2    auditor   full                        none             
 
 Columns: USER, KEY-TYPE, BITS, INFO

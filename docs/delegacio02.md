@@ -1,158 +1,142 @@
-# VirtualCorp – Delegació 02 (jhoanluisaduvirifp25)
+# VirtualCorp - Delegació 02
 
-Responsable: Jhoan Luis Aduviri Zambrana · Rang assignat: **10.2.0.0/16**
+Jhoan Luis Aduviri Zambrana (jhoanluisaduvirifp25)
+Rang de la delegació: **10.2.0.0/16**
 
-Aquest document recull el disseny de xarxa de la delegació, les decisions preses
-en adaptar el repositori inicial i la validació de l'Activitat 1 (desplegament
-dels quatre routers MikroTik).
+En aquesta activitat he desplegat els 4 routers MikroTik de la meva delegació amb els scripts del repositori del professor, adaptats a la meva xarxa.
 
-## 1. Disseny de xarxa
+## 1. Disseny de la xarxa
 
-### 1.1 Zones i subxarxes
+### Xarxes
 
-| Zona | Subxarxa | Passarel·la | Router |
+| Zona | Xarxa | Gateway | Router |
 |---|---|---|---|
-| Planta baixa – zona general (consergeria, expo1–4 .33–.36) | 10.2.0.0/25 | 10.2.0.1 | mikrotik1 |
-| Planta baixa – zona privada / CPD (pve01 .133, dbsrv .134, infosrv .135) | 10.2.0.128/26 | 10.2.0.129 | mikrotik0 |
-| Planta baixa – DMZ (websrv .197) | 10.2.0.192/27 | 10.2.0.193 | mikrotik0 |
-| Enllaç router0–router1 | 10.2.0.224/30 | – | mikrotik0/1 |
-| Enllaç router1–router2 | 10.2.0.228/30 | – | mikrotik1/2 |
-| Enllaç router2–router3 | 10.2.0.232/30 | – | mikrotik2/3 |
-| Planta 1 – desenvolupament | 10.2.1.0/24 | 10.2.1.1 | mikrotik2 |
-| Planta 2 – desenvolupament | 10.2.2.0/24 | 10.2.2.1 | mikrotik2 |
-| Planta 3 – departaments corporatius | 10.2.3.0/25 | 10.2.3.1 | mikrotik3 |
-| Planta 3 – direcció (xarxa aïllada) | 10.2.3.128/25 | 10.2.3.129 | mikrotik3 |
+| Planta baixa (consergeria i expositors) | 10.2.0.0/25 | 10.2.0.1 | mikrotik1 |
+| Zona privada (CPD) | 10.2.0.128/26 | 10.2.0.129 | mikrotik0 |
+| DMZ | 10.2.0.192/27 | 10.2.0.193 | mikrotik0 |
+| Enllaç router0 - router1 | 10.2.0.224/30 | | |
+| Enllaç router1 - router2 | 10.2.0.228/30 | | |
+| Enllaç router2 - router3 | 10.2.0.232/30 | | |
+| Planta 1 | 10.2.1.0/24 | 10.2.1.1 | mikrotik2 |
+| Planta 2 | 10.2.2.0/24 | 10.2.2.1 | mikrotik2 |
+| Planta 3 | 10.2.3.0/25 | 10.2.3.1 | mikrotik3 |
+| Planta 3 - Direcció | 10.2.3.128/25 | 10.2.3.129 | mikrotik3 |
 
-Les impressores (10.2.n.65) queden dins de la subxarxa de cada planta
-(10.2.3.65 és dins de 10.2.3.0/25). Lliure per a ampliacions: 10.2.0.236–10.2.0.255
-i 10.2.4.0–10.2.255.255.
+He comprovat que cap xarxa es solapa amb una altra i que totes estan dins de 10.2.0.0/16. Les IPs fixes de l'enunciat (pve01 .133, dbsrv .134, infosrv .135, websrv .197, expo1-4 .33-.36 i les impressores .65) queden dins de la seva xarxa.
 
-### 1.2 Routers i interfícies
+### Routers
 
-Els routers `router0..3` de l'enunciat s'implementen com les VM `mikrotik0..3`
-(nom usat pel repositori inicial i com a *identity* de RouterOS).
+Al repositori els routers es diuen `mikrotik0` a `mikrotik3`, que són el router0 a router3 de l'enunciat.
 
 | Router | ether1 | ether2 | ether3 | ether4 | ether5 |
 |---|---|---|---|---|---|
-| mikrotik0 | ISP (NAT VirtualBox, DHCP 10.0.2.15) | r0-r1 10.2.0.225/30 | dmz 10.2.0.193/27 | privada 10.2.0.129/26 | – |
-| mikrotik1 | (sense ús) | r0-r1 10.2.0.226/30 | r1-r2 10.2.0.229/30 | pl0 10.2.0.1/25 | – |
-| mikrotik2 | (sense ús) | r1-r2 10.2.0.230/30 | r2-r3 10.2.0.233/30 | pl1 10.2.1.1/24 | pl2 10.2.2.1/24 |
-| mikrotik3 | (sense ús) | r2-r3 10.2.0.234/30 | pl3 10.2.3.1/25 | pl3-direccio 10.2.3.129/25 | – |
+| mikrotik0 | Internet (NAT de VirtualBox, 10.0.2.15) | r0-r1 10.2.0.225/30 | dmz 10.2.0.193/27 | privada 10.2.0.129/26 | |
+| mikrotik1 | no s'utilitza | r0-r1 10.2.0.226/30 | r1-r2 10.2.0.229/30 | pl0 10.2.0.1/25 | |
+| mikrotik2 | no s'utilitza | r1-r2 10.2.0.230/30 | r2-r3 10.2.0.233/30 | pl1 10.2.1.1/24 | pl2 10.2.2.1/24 |
+| mikrotik3 | no s'utilitza | r2-r3 10.2.0.234/30 | pl3 10.2.3.1/25 | pl3-direccio 10.2.3.129/25 | |
 
-Cada nom de la columna és la xarxa interna de VirtualBox (`intnet`) a la qual
-està connectada la NIC.
+Els noms (r0-r1, dmz, pl0...) són les xarxes internes de VirtualBox, que fan de "cable" entre les màquines.
+
+### Esquema
 
 ```mermaid
 flowchart LR
     INET(("Internet"))
-    R0["mikrotik0<br/>(router0)"]
-    R1["mikrotik1<br/>(router1)"]
-    R2["mikrotik2<br/>(router2)"]
-    R3["mikrotik3<br/>(router3)"]
+    R0["mikrotik0"]
+    R1["mikrotik1"]
+    R2["mikrotik2"]
+    R3["mikrotik3"]
 
-    INET -- "ether1 · NAT VirtualBox<br/>10.0.2.15" --- R0
-    R0 -- "10.2.0.224/30<br/>.225 ↔ .226" --- R1
-    R1 -- "10.2.0.228/30<br/>.229 ↔ .230" --- R2
-    R2 -- "10.2.0.232/30<br/>.233 ↔ .234" --- R3
+    INET -- "NAT VirtualBox" --- R0
+    R0 -- "10.2.0.224/30" --- R1
+    R1 -- "10.2.0.228/30" --- R2
+    R2 -- "10.2.0.232/30" --- R3
 
-    R0 --- DMZ["DMZ<br/>10.2.0.192/27<br/>gw .193"]
-    R0 --- PRIV["Privada / CPD<br/>10.2.0.128/26<br/>gw .129"]
-    R1 --- PL0["Planta 0<br/>10.2.0.0/25<br/>gw .1"]
-    R2 --- PL1["Planta 1<br/>10.2.1.0/24<br/>gw .1"]
-    R2 --- PL2["Planta 2<br/>10.2.2.0/24<br/>gw .1"]
-    R3 --- PL3["Planta 3<br/>10.2.3.0/25<br/>gw .1"]
-    R3 --- DIR["Direcció (aïllada)<br/>10.2.3.128/25<br/>gw .129"]
+    R0 --- DMZ["DMZ<br/>10.2.0.192/27"]
+    R0 --- PRIV["Privada CPD<br/>10.2.0.128/26"]
+    R1 --- PL0["Planta 0<br/>10.2.0.0/25"]
+    R2 --- PL1["Planta 1<br/>10.2.1.0/24"]
+    R2 --- PL2["Planta 2<br/>10.2.2.0/24"]
+    R3 --- PL3["Planta 3<br/>10.2.3.0/25"]
+    R3 --- DIR["Direcció<br/>10.2.3.128/25"]
 ```
 
-### 1.3 Encaminament, NAT i DNS
+### Rutes, NAT i DNS
 
-- **RIP v2** (instància `rip1`, redistribueix connectades) a totes les interfícies
-  internes: cada router aprèn totes les subxarxes de la delegació.
-- **Ruta per defecte** estàtica cap al router anterior de la cadena
-  (mikrotik3 → .233, mikrotik2 → .229, mikrotik1 → .225); mikrotik0 l'obté per DHCP de l'ISP.
-- **NAT**: `masquerade` a mikrotik0 per ether1 (únic punt de sortida a Internet).
-- **DNS**: mikrotik0 rep els DNS de l'ISP i fa de resolutor (`allow-remote-requests`)
-  per als altres routers (`servers=10.2.0.225`). Les consultes DNS que arriben per
-  ether1 (ISP) es descarten al tallafoc.
+- Els routers fan servir **RIP** per aprendre les xarxes dels altres (ja venia als scripts del professor).
+- Cada router té una ruta per defecte cap al router anterior: mikrotik3 → mikrotik2 → mikrotik1 → mikrotik0. El mikrotik0 surt a internet pel NAT de VirtualBox.
+- El mikrotik0 fa **NAT** (masquerade) per ether1 perquè les IPs 10.2.x.x puguin sortir a internet.
+- **DNS**: cada router pregunta el DNS al seu gateway, i el mikrotik0 el pregunta a internet. Al mikrotik0 he bloquejat el port 53 (DNS) per ether1 perquè no respongui des de fora.
 
 ## 2. Accés SSH
 
-| Usuari | Clau | Ús |
+| Usuari | Clau | Per a què |
 |---|---|---|
-| `sysadmin` | `configs/ssh/vcorp_sysadmin.pub` (privada a `~/.ssh/vcorp_sysadmin`, mai al repo) | Administració i automatització |
-| `auditor` | `configs/ssh/vcorp_auditor.pub` (clau del professor, sense modificar) | Accés administratiu del professor |
-| `admin` | – | **Deshabilitat** (per defecte no tenia contrasenya) |
+| sysadmin | vcorp_sysadmin (la meva) | Per administrar jo els routers |
+| auditor | vcorp_auditor.pub (la del professor) | Perquè el professor pugui entrar |
+| admin | | El desactivo perquè no té contrasenya |
 
-L'usuari `auditor` té una contrasenya aleatòria que no es desa enlloc: només s'hi
-pot accedir amb la clau del professor.
+L'usuari `auditor` té una contrasenya aleatòria que no es guarda enlloc, així que només s'hi pot entrar amb la clau del professor. Les claus privades no estan al repositori, només les públiques.
 
-Accés des del host: mikrotik0 per `127.0.0.1:2200`; la resta, a través de mikrotik0
-(ProxyJump), per la seva adreça de trànsit:
+Des del PC només es pot entrar directament al mikrotik0 (port 2200). Als altres s'hi entra saltant pel mikrotik0:
 
 ```bash
 ssh -i ~/.ssh/vcorp_sysadmin -p 2200 sysadmin@127.0.0.1
 ssh -i ~/.ssh/vcorp_sysadmin -J sysadmin@127.0.0.1:2200 sysadmin@10.2.0.226
 ```
 
-Per no haver d'escriure-ho cada cop, aquestes dades són a
-[`configs/ssh/ssh_config`](../configs/ssh/ssh_config):
+Per no escriure-ho tot he fet el fitxer `configs/ssh/ssh_config`, i llavors només cal:
 
 ```bash
 ssh -F configs/ssh/ssh_config mikrotik2
 ```
 
-(per al professor, el mateix amb `-i vcorp_auditor` i l'usuari `auditor`.)
-
-## 3. Desplegament reproduïble
+El professor pot entrar igual però amb la seva clau i l'usuari `auditor`:
 
 ```bash
-cp .env.example .env      # DELEGATION_ID ?= 2
-make ssh-keys             # genera vcorp_sysadmin (no toca vcorp_auditor.pub)
-make deploy-routers       # crea i configura mikrotik0..3
-make validate             # proves de connectivitat, Internet i SSH
+ssh -i vcorp_auditor -J auditor@<ip_del_pc>:2200 auditor@10.2.0.226
 ```
 
-Per a una altra delegació només cal canviar `DELEGATION_ID` a `.env`.
+## 3. Com es desplega
 
-## 4. Decisions i problemes resolts
+```bash
+cp .env.example .env
+make ssh-keys          # crea la meva clau vcorp_sysadmin
+make deploy-routers    # crea i configura els 4 routers
+make validate          # fa les proves
+```
 
-| # | Problema detectat | Causa | Solució |
-|---|---|---|---|
-| 1 | Adreces 10.1.x.x a `deploy_routers.sh` | El repo inicial té l'adreçament de Serveis Centrals | Adreces parametritzades amb `DELEGATION_ID`/`NET_PREFIX` (`.env`) |
-| 2 | La zona privada 10.2.0.128/26 (CPD) no tenia passarel·la | El disseny inicial no l'assignava a cap router | Nova interfície `privada` 10.2.0.129/26 a mikrotik0, al costat de la DMZ i l'ISP, perquè el router de frontera controli tot el tràfic del CPD |
-| 3 | `make ssh-keys` generava una clau `vcorp_auditor` nova i sobreescrivia la del professor | El script tractava l'auditor com una clau pròpia | Ja no es genera; el script comprova que existeix la clau publicada |
-| 4 | La clau del professor no s'instal·lava als routers | El bootstrap només instal·lava `sysadmin` | Bootstrap crea l'usuari `auditor` (grup full) i n'importa la clau |
-| 5 | `log_error: orden no encontrada` en camins d'error | Funció no definida (només existia `log_err`) | `log_error` definit a `common.sh` |
-| 6 | Fallada intermitent: `input does not match any value of public-key-file` a mikrotik1 | RouterOS triga uns segons a registrar el fitxer pujat amb `scp` | Funció `import_ssh_key` amb reintents (10 × 2 s) |
-| 7 | Els routers 1–3 no podien resoldre noms | Sense servidor DNS configurat | mikrotik0 com a resolutor; `--dns` a la resta |
-| 8 | Usuari `admin` sense contrasenya | Configuració de fàbrica de CHR | `/user disable admin` un cop instal·lades les claus |
-| 9 | Routers 1–3 no accessibles des del host | La seva NIC1 deixa el NAT després del bootstrap | Reenviament SSH a mikrotik0 (`forwarding-enabled=local`) i accés per ProxyJump |
-| 10 | Després d'engegar, es perdia algun ping entre routers | RIP necessita uns segons per aprendre les rutes | El script de proves espera 25 s després d'engegar cada router |
-| 11 | Host: `apt` fallava i VirtualBox no carregava | Font `cdrom` obsoleta i Secure Boot actiu (ASUS no permet inscriure la MOK) | Font `cdrom` desactivada; Secure Boot desactivat a la BIOS |
+## 4. Canvis que he fet i problemes
 
-## 5. Validació
+| # | Problema | Què he fet |
+|---|---|---|
+| 1 | Les IPs del `deploy_routers.sh` eren 10.1.x.x (Serveis Centrals) | Les he canviat per les de la meva delegació, 10.2.x.x |
+| 2 | La zona privada (10.2.0.128/26) no estava a cap router, i els servidors del CPD no tindrien gateway | L'he posat al mikrotik0, al costat de la DMZ, perquè així el router de sortida controla l'accés a tots els servidors |
+| 3 | `make ssh-keys` creava una clau `vcorp_auditor` nova i sobreescrivia la del professor | He comentat aquesta línia a `create_ssh_keys.sh` |
+| 4 | La clau del professor no s'instal·lava als routers | He afegit l'usuari `auditor` i la importació de la seva clau a `router_base.sh` |
+| 5 | Al mikrotik1 va fallar: `input does not match any value of public-key-file` | El router tarda una mica a veure el fitxer pujat amb scp. He posat un `sleep 3` abans d'importar les claus |
+| 6 | Els routers 1, 2 i 3 no podien fer ping a noms (www.google.com) | Cada router fa servir el seu gateway com a DNS |
+| 7 | No podia entrar per SSH als routers 1, 2 i 3 | He activat `forwarding-enabled` al mikrotik0 per poder saltar per ell |
+| 8 | L'usuari `admin` no tenia contrasenya | L'he desactivat |
+| 9 | Després d'engegar els routers, a vegades es perdia el primer ping | El RIP tarda uns segons. Al script de proves espero 25 segons després d'engegar cada router |
+| 10 | Al meu PC no s'instal·lava VirtualBox: `apt` donava error i el mòdul no carregava | Vaig desactivar la font `cdrom` d'apt i el Secure Boot a la BIOS |
 
-Les proves es fan amb `make validate`
-([`automation/scripts/validate_routers.sh`](../automation/scripts/validate_routers.sh)):
-engega els routers i, a cadascun, mostra les adreces IP, fa ping als quatre routers,
-a 1.1.1.1 i a www.google.com, i llista els usuaris i les claus SSH.
+## 5. Proves
 
-- [`evidencies/validacio.txt`](evidencies/validacio.txt) – resultat de `make validate`.
-- [`evidencies/validacio-reinici.txt`](evidencies/validacio-reinici.txt) – resultat després
-  d'apagar els quatre routers i tornar-los a engegar (uptime d'1 minut aprox.).
+Les proves les fa el script `automation/scripts/validate_routers.sh` (`make validate`). A cada router mira les IPs, fa ping als altres routers, a 1.1.1.1 i a www.google.com, i mostra els usuaris i les claus.
 
-| Comprovació | mikrotik0 | mikrotik1 | mikrotik2 | mikrotik3 |
+- [validacio.txt](evidencies/validacio.txt): proves després de desplegar.
+- [validacio-reinici.txt](evidencies/validacio-reinici.txt): proves després d'apagar i tornar a engegar els 4 routers, per veure que la configuració es guarda.
+
+| Prova | mikrotik0 | mikrotik1 | mikrotik2 | mikrotik3 |
 |---|---|---|---|---|
-| Identity, adreces i màscares segons el disseny | OK | OK | OK | OK |
-| Ping als altres tres routers (0 % pèrdua) | OK | OK | OK | OK |
-| Ping 1.1.1.1 | OK | OK | OK | OK |
-| Resolució i ping de www.google.com | OK | OK | OK | OK |
-| SSH personal (`sysadmin` + `vcorp_sysadmin`) | OK | OK | OK | OK |
-| Clau del professor a l'usuari `auditor` | OK | OK | OK | OK |
-| `admin` deshabilitat (marca `X`) | OK | OK | OK | OK |
-| Configuració persistent després de reiniciar | OK | OK | OK | OK |
+| IPs correctes | OK | OK | OK | OK |
+| Ping als altres routers | OK | OK | OK | OK |
+| Ping a 1.1.1.1 | OK | OK | OK | OK |
+| Ping a www.google.com | OK | OK | OK | OK |
+| Entro amb la meva clau (sysadmin) | OK | OK | OK | OK |
+| Clau del professor instal·lada (auditor) | OK | OK | OK | OK |
+| admin desactivat | OK | OK | OK | OK |
+| Després de reiniciar tot segueix igual | OK | OK | OK | OK |
 
-La clau privada del professor no està disponible a l'alumne, per tant l'accés
-de l'auditor es verifica comprovant que la seva clau pública està importada a
-l'usuari `auditor` (grup `full`) de cada router; l'usuari pot entrar-hi amb:
-`ssh -i vcorp_auditor -J auditor@<host>:2200 auditor@10.2.0.226`.
+No puc provar d'entrar amb la clau del professor perquè no tinc la seva clau privada, però he comprovat que la seva clau pública està a l'usuari `auditor` de tots els routers.

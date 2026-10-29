@@ -272,9 +272,8 @@ parse_router_args() {
     local -n ref_ips="$2"
     local -n ref_nat="$3"
     local -n ref_gateway="$4"
-    local -n ref_dns="$5"
 
-    shift 5
+    shift 4
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -306,16 +305,6 @@ parse_router_args() {
                 fi
 
                 ref_gateway="$2"
-                shift 2
-                ;;
-
-            --dns)
-                if [[ $# -lt 2 ]]; then
-                    log_error "--dns requereix un valor."
-                    return 1
-                fi
-
-                ref_dns="$2"
                 shift 2
                 ;;
 
@@ -486,32 +475,6 @@ attach_router_disk() {
 # BOOTSTRAP DE ROUTEROS
 # =========================================================
 
-# RouterOS pot trigar uns segons a registrar un fitxer pujat amb scp;
-# per això la importació de la clau es reintenta abans de donar error.
-import_ssh_key() {
-    local ssh_port="$1"
-    local user="$2"
-    local key_file="$3"
-    local attempt
-
-    for attempt in 1 2 3 4 5 6 7 8 9 10; do
-        if ssh \
-            -o StrictHostKeyChecking=no \
-            -o UserKnownHostsFile=/dev/null \
-            -p "$ssh_port" \
-            admin@127.0.0.1 \
-            "/user ssh-keys import user=${user} public-key-file=${key_file}"; then
-            return 0
-        fi
-
-        log_warn "Fitxer '${key_file}' encara no disponible (intent ${attempt}/10)"
-        sleep 2
-    done
-
-    return 1
-}
-
-
 bootstrap_routeros() {
     local name="$1"
     local ssh_port="$2"
@@ -567,28 +530,7 @@ EOF
         admin@127.0.0.1:sysadmin.pub \
         || return 1
 
-
-    import_ssh_key "$ssh_port" sysadmin sysadmin.pub
-
-    if [[ $? -ne 0 ]]; then
-        log_err "No s'ha pogut instal·lar la clau SSH."
-        return 1
-    fi
-
-
-    # -----------------------------------------------------
-    # Accés del professor (usuari auditor)
-    # -----------------------------------------------------
-    #
-    # Contrasenya aleatòria que no es desa enlloc: l'accés
-    # de l'auditor és exclusivament amb la seva clau pública.
-    #
-
-    log_info "Injectant clau SSH de l'auditor (professor)"
-
-    local auditor_password
-    auditor_password="$(head -c 24 /dev/urandom | base64 | tr -dc 'A-Za-z0-9' | head -c 24)"
-
+    # clau del profe (usuari auditor)
     scp \
         -o StrictHostKeyChecking=no \
         -o UserKnownHostsFile=/dev/null \
@@ -597,20 +539,26 @@ EOF
         admin@127.0.0.1:auditor.pub \
         || return 1
 
+    # el router tarda una mica a veure els fitxers pujats, si no a vegades falla
+    sleep 3
+
+    # contrasenya aleatoria, el profe entra amb la clau
+    local auditor_pass=$(openssl rand -hex 12)
+
     ssh \
         -o StrictHostKeyChecking=no \
         -o UserKnownHostsFile=/dev/null \
         -p "$ssh_port" \
         admin@127.0.0.1 <<EOF
 
-/user add name=auditor group=full password="${auditor_password}" comment="VirtualCorp auditor (professor)" disabled=no
+/user ssh-keys import user=sysadmin public-key-file=sysadmin.pub
+/user add name=auditor group=full password="$auditor_pass" comment="usuari del profe" disabled=no
+/user ssh-keys import user=auditor public-key-file=auditor.pub
 
 EOF
 
-    import_ssh_key "$ssh_port" auditor auditor.pub
-
     if [[ $? -ne 0 ]]; then
-        log_err "No s'ha pogut instal·lar la clau de l'auditor."
+        log_err "No s'ha pogut instal·lar la clau SSH."
         return 1
     fi
 
@@ -628,7 +576,6 @@ generate_router_config() {
     local ips_name="$3"
     local nat=$4
     local name=$5
-    local dns=$6
 
     local -n ref_ips="$ips_name"
 
@@ -686,36 +633,23 @@ EOF
     if [[ "$nat" == true ]]; then
         cat >> "$rsc_file" <<EOF
 /ip firewall nat add chain=srcnat out-interface=ether1 action=masquerade
-EOF
-    fi
-
-    # -----------------------------------------------------
-    # DNS
-    # -----------------------------------------------------
-    #
-    # El router amb NAT obté els DNS de l'ISP per DHCP i fa de
-    # resolutor per a la resta; no respon consultes des de l'ISP.
-    # També permet el reenviament SSH (ProxyJump) per arribar
-    # als routers interns, que no tenen accés directe des del host.
-    #
-
-    if [[ "$nat" == true ]]; then
-        cat >> "$rsc_file" <<EOF
-/ip dns set allow-remote-requests=yes
 /ip ssh set forwarding-enabled=local
-/ip firewall filter add chain=input in-interface=ether1 protocol=udp dst-port=53 action=drop comment="DNS no accessible des de l'ISP"
-/ip firewall filter add chain=input in-interface=ether1 protocol=tcp dst-port=53 action=drop comment="DNS no accessible des de l'ISP"
-EOF
-    elif [[ -n "$dns" ]]; then
-        cat >> "$rsc_file" <<EOF
-/ip dns set servers=$dns
+/ip firewall filter add chain=input in-interface=ether1 protocol=udp dst-port=53 action=drop
 EOF
     fi
 
-    # -----------------------------------------------------
-    # Usuari admin per defecte (sense contrasenya)
-    # -----------------------------------------------------
+    # DNS: cada router pregunta al seu gateway, i el mikrotik0 surt a internet
+    cat >> "$rsc_file" <<EOF
+/ip dns set allow-remote-requests=yes
+EOF
 
+    if [[ -n "$gateway" ]]; then
+        cat >> "$rsc_file" <<EOF
+/ip dns set servers=$gateway
+EOF
+    fi
+
+    # admin no te contrasenya, el desactivo
     cat >> "$rsc_file" <<EOF
 /user disable admin
 EOF
@@ -732,7 +666,6 @@ apply_router_config() {
     local gateway="$3"
     local ips_name="$4"
     local nat="$5"
-    local dns="$6"
 
     local rsc_file="/tmp/${name}_config.rsc"
 
@@ -744,7 +677,6 @@ apply_router_config() {
         "$ips_name" \
         "$nat" \
         "$name" \
-        "$dns" \
         || return 1
 
 
@@ -861,14 +793,12 @@ create_router() {
     local ips=()
     local nat=false
     local gateway=""
-    local dns=""
 
     parse_router_args \
         intnets \
         ips \
         nat \
         gateway \
-        dns \
         "$@" \
         || return 1
 
@@ -953,7 +883,6 @@ create_router() {
         "$gateway" \
         ips \
         "$nat" \
-        "$dns" \
         || return 1
 
 

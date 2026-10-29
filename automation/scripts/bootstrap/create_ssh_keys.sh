@@ -203,13 +203,7 @@ mkdir -p "${PUBLIC_KEY_DIR}"
 
 check_repo_for_private_keys
 
-# vcorp_auditor és la clau pública del professor (publicada al Moodle).
-# No es genera aquí: fer-ho sobreescriuria configs/ssh/vcorp_auditor.pub.
-if [[ ! -f "${PUBLIC_KEY_DIR}/vcorp_auditor.pub" ]]; then
-    log_err "Falta ${PUBLIC_KEY_DIR}/vcorp_auditor.pub (clau pública del professor)."
-    exit 1
-fi
-
+# generate_key "vcorp_auditor"   # NO: sobreescriu la clau publica del profe
 generate_key "vcorp_sysadmin"
 generate_mikrotik_key
 
@@ -224,11 +218,12 @@ VirtualCorp SSH Keys generades correctament
 ==================================================
 
 Privades (LOCAL):
-  ${PRIVATE_KEY_DIR}/vcorp_sysadmin
+  ${PRIVATE_KEY_DIR}/vcorp_auditor
+  ${PRIVATE_KEY_DIR}/sysadmin
 
 Públiques (REPO):
-  ${PUBLIC_KEY_DIR}/vcorp_auditor.pub (professor, no es modifica)
-  ${PUBLIC_KEY_DIR}/vcorp_sysadmin.pub
+  ${PUBLIC_KEY_DIR}/vcorp_auditor.pub
+  ${PUBLIC_KEY_DIR}/sysadmin.pub
 
 Regles del laboratori:
   - NO pujar mai claus privades a GitHub
