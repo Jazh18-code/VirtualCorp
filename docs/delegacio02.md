@@ -94,6 +94,13 @@ ssh -i ~/.ssh/vcorp_sysadmin -p 2200 sysadmin@127.0.0.1
 ssh -i ~/.ssh/vcorp_sysadmin -J sysadmin@127.0.0.1:2200 sysadmin@10.2.0.226
 ```
 
+Per no haver d'escriure-ho cada cop, aquestes dades són a
+[`configs/ssh/ssh_config`](../configs/ssh/ssh_config):
+
+```bash
+ssh -F configs/ssh/ssh_config mikrotik2
+```
+
 (per al professor, el mateix amb `-i vcorp_auditor` i l'usuari `auditor`.)
 
 ## 3. Desplegament reproduïble
@@ -103,7 +110,6 @@ cp .env.example .env      # DELEGATION_ID ?= 2
 make ssh-keys             # genera vcorp_sysadmin (no toca vcorp_auditor.pub)
 make deploy-routers       # crea i configura mikrotik0..3
 make validate             # proves de connectivitat, Internet i SSH
-make validate-reboot      # el mateix després de reiniciar (persistència)
 ```
 
 Per a una altra delegació només cal canviar `DELEGATION_ID` a `.env`.
@@ -121,16 +127,19 @@ Per a una altra delegació només cal canviar `DELEGATION_ID` a `.env`.
 | 7 | Els routers 1–3 no podien resoldre noms | Sense servidor DNS configurat | mikrotik0 com a resolutor; `--dns` a la resta |
 | 8 | Usuari `admin` sense contrasenya | Configuració de fàbrica de CHR | `/user disable admin` un cop instal·lades les claus |
 | 9 | Routers 1–3 no accessibles des del host | La seva NIC1 deixa el NAT després del bootstrap | Reenviament SSH a mikrotik0 (`forwarding-enabled=local`) i accés per ProxyJump |
-| 10 | La prova de persistència no reiniciava mikrotik1–3 (uptime no es reiniciava) | Es reiniciava primer mikrotik0, que és el salt SSH cap als altres | Reinici en ordre invers (mikrotik3 → mikrotik0); es verifica amb l'uptime |
+| 10 | Després d'engegar, es perdia algun ping entre routers | RIP necessita uns segons per aprendre les rutes | El script de proves espera 25 s després d'engegar cada router |
 | 11 | Host: `apt` fallava i VirtualBox no carregava | Font `cdrom` obsoleta i Secure Boot actiu (ASUS no permet inscriure la MOK) | Font `cdrom` desactivada; Secure Boot desactivat a la BIOS |
 
 ## 5. Validació
 
-Evidències generades automàticament (sortida real dels routers):
+Les proves es fan amb `make validate`
+([`automation/scripts/validate_routers.sh`](../automation/scripts/validate_routers.sh)):
+engega els routers i, a cadascun, mostra les adreces IP, fa ping als quatre routers,
+a 1.1.1.1 i a www.google.com, i llista els usuaris i les claus SSH.
 
-- [`evidencies/validacio.txt`](evidencies/validacio.txt) – `make validate` després del desplegament.
-- [`evidencies/validacio-reinici.txt`](evidencies/validacio-reinici.txt) – `make validate-reboot`
-  (els quatre routers reiniciats; uptime < 2 min).
+- [`evidencies/validacio.txt`](evidencies/validacio.txt) – resultat de `make validate`.
+- [`evidencies/validacio-reinici.txt`](evidencies/validacio-reinici.txt) – resultat després
+  d'apagar els quatre routers i tornar-los a engegar (uptime d'1 minut aprox.).
 
 | Comprovació | mikrotik0 | mikrotik1 | mikrotik2 | mikrotik3 |
 |---|---|---|---|---|
@@ -140,7 +149,7 @@ Evidències generades automàticament (sortida real dels routers):
 | Resolució i ping de www.google.com | OK | OK | OK | OK |
 | SSH personal (`sysadmin` + `vcorp_sysadmin`) | OK | OK | OK | OK |
 | Clau del professor a l'usuari `auditor` | OK | OK | OK | OK |
-| `admin` deshabilitat | OK | OK | OK | OK |
+| `admin` deshabilitat (marca `X`) | OK | OK | OK | OK |
 | Configuració persistent després de reiniciar | OK | OK | OK | OK |
 
 La clau privada del professor no està disponible a l'alumne, per tant l'accés
